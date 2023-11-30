@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {Text, TextInput, View, TouchableOpacity} from 'react-native';
+import {Text, TextInput, View, TouchableOpacity, Button} from 'react-native';
 
 const LoginScreen = props => {
   const [email, setEmail] = useState('');
@@ -43,10 +43,13 @@ const LoginScreen = props => {
           width: 350,
         }}
       />
-      <Text>Welcome to the LoginScreen</Text>
-      <TouchableOpacity>
-        <Text>Click me</Text>
-      </TouchableOpacity>
+      <Button title={'Login'} onPress={async () => {}} />
+      <Button
+        title={'Signup'}
+        onPress={() => {
+          props.navigation.navigate('Signup');
+        }}
+      />
     </View>
   );
 };
