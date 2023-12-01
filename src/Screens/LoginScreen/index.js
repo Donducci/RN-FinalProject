@@ -45,7 +45,7 @@ const LoginScreen = props => {
       />
       <Button title={'Login'} onPress={async () => {}} />
       <Button
-        title={'Signup'}
+        title={'Register'}
         onPress={() => {
           props.navigation.navigate('Signup');
         }}

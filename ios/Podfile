@@ -45,6 +45,12 @@ target 'RNativeModulesPractice' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  # Add these lines to fix the Swift pods issue
+  use_modular_headers!
+
+  pod 'Firebase'
+  # Add other Firebase pods as needed
+
   target 'RNativeModulesPracticeTests' do
     inherit! :complete
     # Pods for testing
