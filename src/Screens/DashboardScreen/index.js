@@ -1,13 +1,20 @@
 import React from 'react';
-import {Text, TextInput, View, TouchableOpacity} from 'react-native';
+import {Text, TextInput, View, Button} from 'react-native';
+import auth from '@react-native-firebase/auth';
 
-const DashboardScreen = () => {
+const DashboardScreen = props => {
   return (
     <View>
       <Text>Welcome to the Dashboard!</Text>
-      <TouchableOpacity>
-        <Text>Click me</Text>
-      </TouchableOpacity>
+      <Button
+        title={'Logout'}
+        onPress={() => {
+          auth()
+            .signOut()
+            .then(() => console.log('User signed out!'));
+          props.navigation.navigate('Login');
+        }}
+      />
     </View>
   );
 };

@@ -1,44 +1,49 @@
 import {useEffect, useState} from 'react';
-import {} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SignupScreen from '../Screens/SignupScreen';
 import DashboardScreen from '../Screens/DashboardScreen';
 import LoginScreen from '../Screens/LoginScreen';
-// import {SignupScreen, DashboardScreen, LoginScreen} from '../Screens';
-import {useNavigation} from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
 
 const Stack = createNativeStackNavigator();
 
 const Navigator = props => {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState('');
+  const [user, setUser] = useState(undefined);
 
-  const navigation = useNavigation();
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
 
-  const getAuthStack = () => {
-    return (
-      <Stack.Group>
-        <Stack.Screen name="Login" component={LoginScreen}></Stack.Screen>
-        <Stack.Screen name="Signup" component={SignupScreen}></Stack.Screen>
-      </Stack.Group>
-    );
-  };
+  function onAuthStateChanged(user) {
+    setUser(user);
+  }
 
-  const getMainStack = () => {
-    return (
-      <Stack.Group>
-        <Stack.Screen
-          name="DashboardScreen"
-          component={DashboardScreen}
-          options={{title: 'Overview'}}
-        />
-      </Stack.Group>
-    );
-  };
+  const getAuthStack = () => (
+    <Stack.Group>
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Signup" component={SignupScreen} />
+    </Stack.Group>
+  );
+
+  const getMainStack = () => (
+    <Stack.Group>
+      <Stack.Screen
+        name="DashboardScreen"
+        component={DashboardScreen}
+        options={{title: 'Overview'}}
+      />
+    </Stack.Group>
+  );
+
+  const isUserLoggedIn = user && user.uid;
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="Login">
       {isUserLoggedIn ? getMainStack() : getAuthStack()}
     </Stack.Navigator>
   );
 };
+
 export default Navigator;
