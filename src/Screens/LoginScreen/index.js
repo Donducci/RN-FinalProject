@@ -1,12 +1,6 @@
 import React, {useState} from 'react';
-import {
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-  Button,
-  StyleSheet,
-} from 'react-native';
+import {TextInput, View, Button, StyleSheet} from 'react-native';
+import auth from '@react-native-firebase/auth';
 
 const LoginScreen = props => {
   const [email, setEmail] = useState('');
@@ -29,7 +23,26 @@ const LoginScreen = props => {
         placeholder="enter password"
         style={styles.input}
       />
-      <Button title={'Login'} onPress={async () => {}} />
+      <Button
+        title={'Login'}
+        onPress={async () => {
+          auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(() => {
+              console.log('User account created & signed in!');
+            })
+            .catch(error => {
+              if (error.code === 'auth/email-already-in-use') {
+                console.log('That email address is already in use!');
+              }
+              if (error.code === 'auth/invalid-email') {
+                console.log('That email address is invalid!');
+              }
+              console.error(error);
+            });
+          props.navigation.navigate('DashboardScreen');
+        }}
+      />
       <Button
         title={'Register'}
         onPress={() => {

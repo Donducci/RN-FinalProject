@@ -1,9 +1,8 @@
+/* eslint-disable react/react-in-jsx-scope */
 import {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import SignupScreen from '../Screens/SignupScreen';
-import DashboardScreen from '../Screens/DashboardScreen';
-import LoginScreen from '../Screens/LoginScreen';
+import {SignupScreen, DashboardScreen, LoginScreen} from '../Screens';
 import auth from '@react-native-firebase/auth';
 
 const Stack = createNativeStackNavigator();

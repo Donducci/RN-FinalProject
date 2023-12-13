@@ -1,13 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-  Button,
-  StyleSheet,
-} from 'react-native';
+import {TextInput, View, Button, StyleSheet} from 'react-native';
 import auth from '@react-native-firebase/auth';
 
 const SignupScreen = props => {
