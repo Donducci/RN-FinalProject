@@ -2,7 +2,12 @@
 import {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {SignupScreen, DashboardScreen, LoginScreen} from '../Screens';
+import {
+  SignupScreen,
+  DashboardScreen,
+  LoginScreen,
+  MapScreen,
+} from '../Screens';
 import auth from '@react-native-firebase/auth';
 
 const Stack = createNativeStackNavigator();
@@ -28,6 +33,11 @@ const Navigator = props => {
 
   const getMainStack = () => (
     <Stack.Group>
+      <Stack.Screen
+        name="MapScreen"
+        component={MapScreen}
+        options={{title: 'Map Screen'}}
+      />
       <Stack.Screen
         name="DashboardScreen"
         component={DashboardScreen}
