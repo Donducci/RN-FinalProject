@@ -15,6 +15,12 @@ const DashboardScreen = props => {
           props.navigation.navigate('Login');
         }}
       />
+      <Button
+        title={'MapScreen'}
+        onPress={() => {
+          props.navigation.navigate('MapSreen');
+        }}
+      />
     </View>
   );
 };
